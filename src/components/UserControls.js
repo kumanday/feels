@@ -84,7 +84,7 @@ const UserControls = () => {
               id="gain-slider"
               type="range"
               min="0"
-              max="2"
+              max="5"
               step="0.1"
               value={localGain}
               onChange={handleGainChange}
@@ -108,7 +108,7 @@ const UserControls = () => {
               id="fft-slider"
               type="range"
               min="32"
-              max="32768"
+              max="8192"
               step="32"
               value={localFftSize}
               onChange={handleFftSizeChange}

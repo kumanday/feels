@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AudioCtx } from './AudioCapture'; // Assuming AudioCapture.js is in the same directory
 
-const Oscilloscope = () => {
+const Oscilloscope = ({ transparent = false }) => {
   const { analyser, isListening } = useContext(AudioCtx);
   const canvasRef = useRef(null);
 
@@ -20,9 +20,14 @@ const Oscilloscope = () => {
     const draw = () => {
       analyser.getFloatTimeDomainData(dataArray);
 
-      // Clear canvas
-      ctx.fillStyle = 'rgb(0, 0, 0)'; // Dark background
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Clear canvas (only if not in transparent mode)
+      if (!transparent) {
+        ctx.fillStyle = 'rgb(0, 0, 0)'; // Dark background
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      } else {
+        // Clear with transparency for overlay mode
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
 
       // Draw waveform
       ctx.lineWidth = 2;
